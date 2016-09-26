@@ -1,0 +1,29 @@
+{
+  "name": "stdout-to-websocket",
+  "version": "0.0.1",
+  "description": "Redirect all from STDOUT to a websocket server.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drag0s/stdout-to-websocket.git"
+  },
+  "keywords": [
+    "websockets",
+    "stdout",
+    "stdin",
+    "server",
+    "nodejs"
+  ],
+  "author": "Dragos Fotescu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Drag0s/stdout-to-websocket/issues"
+  },
+  "homepage": "https://github.com/Drag0s/stdout-to-websocket#readme",
+  "dependencies": {
+    "socket.io": "^1.4.8"
+  }
+}
