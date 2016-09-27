@@ -1,5 +1,5 @@
 {
-  "name": "stdout-to-websocket",
+  "name": "node-websocketd",
   "version": "0.0.1",
   "description": "Redirect all from STDOUT to a websocket server.",
   "main": "app.js",
@@ -8,10 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Drag0s/stdout-to-websocket.git"
+    "url": "git+https://github.com/Drag0s/node-websocketd.git"
   },
   "keywords": [
     "websockets",
+    "websocketd",
+    "auth",
     "stdout",
     "stdin",
     "server",
@@ -20,10 +22,10 @@
   "author": "Dragos Fotescu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Drag0s/stdout-to-websocket/issues"
+    "url": "https://github.com/Drag0s/node-websocketd/issues"
   },
-  "homepage": "https://github.com/Drag0s/stdout-to-websocket#readme",
+  "homepage": "https://github.com/Drag0s/node-websocketd#readme",
   "dependencies": {
-    "socket.io": "^1.4.8"
+
   }
 }
