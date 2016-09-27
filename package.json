@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/Drag0s/node-websocketd#readme",
   "dependencies": {
-
+    "websocket": "^1.0.23"
   }
 }
