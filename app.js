@@ -1,5 +1,11 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
+var argv = require('yargs')
+	.alias('e', 'exec')
+	.demand(0, ['e'])
+	.argv;
+
+var controllers = require('./controllers.js');
 
 var PORT = 8099;
 
@@ -19,16 +25,5 @@ wsServer = new WebSocketServer({
 });
 
 wsServer.on('request', function(request) {
-    var connection = request.accept('', request.origin);
-    console.log((new Date()) + ' Connection accepted.');
-    connection.on('message', function(message) {
-        if (message.type === 'utf8') {
-            console.log('Received Message: ' + message.utf8Data);
-        }
-    });
-    var i = 0;
-    setInterval(function() {
-    	connection.sendUTF("Seconds since connected: " + i);
-    	++i;
-    }, 1000)
+    controllers.onRequest(request, argv);
 });
