@@ -37,7 +37,6 @@ exports.onRequest = function(request, argv) {
         		}
         		else {
         			console.log("Client tried to authorize with " + message.utf8Data);
-                    console.log("Correct is " + argv.password);
         		}
         	} else {
         		console.log("Data " + message.utf8Data + " received from authorized user");
