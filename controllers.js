@@ -6,7 +6,7 @@ exports.onRequest = function(request, argv) {
 	var authorized = false;
 	
 	var path = utils.getProcessPath(argv);
-	console.log(path);
+
 	connection.process = {};
 	
     connection.on('message', function(message) {
