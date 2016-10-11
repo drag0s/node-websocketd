@@ -8,7 +8,7 @@ var argv = require('yargs')
 	.demand(['e'])
 	.argv;
 
-var controllers = require('./controllers.js');
+var controllers = require('./lib/connectionCtrl.js');
 
 var PORT = argv.port;
 
