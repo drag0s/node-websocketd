@@ -9,6 +9,7 @@ var argv = require('yargs')
 	.argv;
 
 var controllers = require('./lib/connectionCtrl.js');
+var utils = require('./lib/utils.js');
 
 var PORT = argv.port;
 
@@ -21,7 +22,7 @@ var server = http.createServer(function(request, response) {
 });
 
 server.listen(PORT, function() {
-    console.log((new Date()) + ' Server is listening on port ' + PORT);
+    utils.log('Server is listening on port ' + PORT);
 });
 
 wsServer = new WebSocketServer({
