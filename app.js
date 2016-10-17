@@ -4,8 +4,17 @@ var argv = require('yargs')
 	.alias('e', 'exec')
     .default('port', 8080)
     .alias('p', 'password')
+    .alias('ssl', 'https')
+    .boolean('ssl')
+    .describe('ssl', 'Add https support')
+    .describe('ssl-key', 'Route to SSL key')
+    .describe('ssl-cert', 'Route to SSL certificate')
+    .describe('port', 'Set the port to listen')
+    .describe('e', 'Set the command you want to execute')
     .describe('p', 'Set a specific password to the WebSocket server')
-	.demand(['e'])
+    .demand(['e'])
+    .implies('ssl', 'ssl-cert')
+    .implies('ssl-cert', 'ssl-key')
 	.argv;
 
 var controllers = require('./lib/connectionCtrl.js');
