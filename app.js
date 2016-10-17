@@ -1,21 +1,28 @@
 var WebSocketServer = require('websocket').server;
-var http = require('http');
+var fs = require('fs');
 var argv = require('yargs')
 	.alias('e', 'exec')
     .default('port', 8080)
     .alias('p', 'password')
     .alias('ssl', 'https')
     .boolean('ssl')
+    .alias('ssl-key', 'key')
+    .alias('ssl-cert', 'cert')
+    .alias('ssl-passphrase', 'passphrase')
     .describe('ssl', 'Add https support')
-    .describe('ssl-key', 'Route to SSL key')
-    .describe('ssl-cert', 'Route to SSL certificate')
+    .describe('ssl-key', 'Route to SSL key (required if ssl flag)')
+    .describe('ssl-cert', 'Route to SSL certificate (required if ssl flag)')
+    .describe('ssl-passphrase', 'Specifies SSL private passphrase')
     .describe('port', 'Set the port to listen')
     .describe('e', 'Set the command you want to execute')
     .describe('p', 'Set a specific password to the WebSocket server')
     .demand(['e'])
     .implies('ssl', 'ssl-cert')
     .implies('ssl-cert', 'ssl-key')
+    .implies('ssl-key', 'ssl-passphrase')
 	.argv;
+
+var httpServer = (argv.ssl) ? require('https') : require('http');
 
 var controllers = require('./lib/connectionCtrl.js');
 var utils = require('./lib/utils.js');
@@ -24,11 +31,21 @@ var PORT = argv.port;
 
 if (argv.password === undefined) console.log("\033[31m\nWARNING: It is recommended to set a password and use encrypted connections with sensible data.\n \x1b[0m")
 
-var server = http.createServer(function(request, response) {
+var processReq = function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
     response.writeHead(404);
     response.end();
-});
+};
+
+if (argv.ssl) {
+    var server = httpServer.createServer({
+        key: fs.readFileSync(argv.key, 'utf8'),
+        cert: fs.readFileSync(argv.cert, 'utf8'),
+        passphrase: argv.passphrase.toString()
+    }, processReq).listen(PORT);
+} else {
+    var server = httpServer.createServer(processReq).listen(PORT);
+}
 
 server.listen(PORT, function() {
     utils.log('Server is listening on port ' + PORT);
