@@ -1,6 +1,6 @@
-var WebSocketServer = require('websocket').server;
-var fs = require('fs');
-var argv = require('yargs')
+const WebSocketServer = require('websocket').server;
+const fs = require('fs');
+const argv = require('yargs')
 	.alias('e', 'exec')
     .default('port', 8080)
     .alias('p', 'password')
@@ -22,40 +22,41 @@ var argv = require('yargs')
     .implies('ssl-key', 'ssl-passphrase')
 	.argv;
 
-var httpServer = (argv.ssl) ? require('https') : require('http');
+const httpServer = (argv.ssl) ? require('https') : require('http');
 
-var controllers = require('./lib/connectionCtrl.js');
-var utils = require('./lib/utils.js');
+const controllers = require('./lib/connectionCtrl.js');
+const utils = require('./lib/utils.js');
 
-var PORT = argv.port;
+const PORT = argv.port;
 
-if (argv.password === undefined) console.log("\033[31m\nWARNING: It is recommended to set a password and use encrypted connections with sensible data.\n \x1b[0m")
+if (!argv.password) console.log("\033[31m\nWARNING: It is recommended to set a password and use encrypted connections with sensible data.\n \x1b[0m")
 
-var processReq = function(request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
-};
-
-if (argv.ssl) {
-    var server = httpServer.createServer({
-        key: fs.readFileSync(argv.key, 'utf8'),
-        cert: fs.readFileSync(argv.cert, 'utf8'),
-        passphrase: argv.passphrase.toString()
-    }, processReq).listen(PORT);
-} else {
-    var server = httpServer.createServer(processReq).listen(PORT);
+function processReq(request, response) {
+  console.log((new Date()) + ' Received request for ' + request.url);
+  response.writeHead(404);
+  response.end();
 }
 
-server.listen(PORT, function() {
-    utils.log('Server is listening on port ' + PORT);
+let server;
+if (argv.ssl) {
+  server = httpServer.createServer({
+    key: fs.readFileSync(argv.key, 'utf8'),
+    cert: fs.readFileSync(argv.cert, 'utf8'),
+    passphrase: argv.passphrase.toString()
+  }, processReq).listen(PORT);
+} else {
+	server = httpServer.createServer(processReq).listen(PORT);
+}
+
+server.listen(PORT, () => {
+	utils.log('Server is listening on port ' + PORT);
 });
 
 wsServer = new WebSocketServer({
-    httpServer: server,
-    autoAcceptConnections: false
+  httpServer: server,
+  autoAcceptConnections: false
 });
 
-wsServer.on('request', function(request) {
-    controllers.onRequest(request, argv);
+wsServer.on('request', request => {
+  controllers.onRequest(request, argv);
 });
