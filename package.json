@@ -4,6 +4,7 @@
   "description": "Redirect all from STDOUT to a websocket server.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
