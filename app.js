@@ -9,7 +9,7 @@ const utils = require('./lib/utils.js');
 
 const PORT = argv.port;
 
-if (!argv.password) console.log("\033[31m\nWARNING: It is recommended to set a password and use encrypted connections with sensible data.\n \x1b[0m")
+if (!argv.password || !argv.ssl) console.log("\033[31m\nWARNING: It is recommended to set a password and use encrypted connections with sensible data.\n \x1b[0m")
 
 function processReq(request, response) {
   console.log((new Date()) + ' Received request for ' + request.url);
