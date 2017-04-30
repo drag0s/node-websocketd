@@ -6,17 +6,15 @@ Redirect all data from the STDOUT of a process to a WebSocket server. Inspired b
 Node and NPM are required.
 
 ```
-git clone https://github.com/Drag0s/node-websocketd.git
-cd node-websocketd
-npm install
+npm install -g node-websocketd
 ```
 
 ## Usage
 
 ```
-$ node app.js --help
+$ node-websocketd --help
 
-    --ssl, --https                  Add https support                    [boolean]
+  --ssl, --https                  Add https support                    [boolean]
   --ssl-key, --key                Route to SSL key (required if ssl flag)
   --ssl-cert, --cert              Route to SSL certificate (required if ssl
                                   flag)
@@ -31,22 +29,20 @@ $ node app.js --help
 
 Starting a basic WebSocket server from a specified process:
 
-`node app.js -e=./examples/myShellScript.sh`
+`node-websocketd -e=./examples/myShellScript.sh`
 
 Starting a basic WebSocket server from a specified process in a specified port:
 
-`node app.js -e=./examples/myShellScript.sh --port 9999`
+`node-websocketd -e=./examples/myShellScript.sh --port 9999`
 
 Starting a WebSocket server protected with a specified password from a specified process (the process will not execute until recieve the correct password):
 
-`node app.js -e=./examples/myShellScript.sh -password secr3tp4ssw0rd_123`
+`node-websocketd -e=./examples/myShellScript.sh -password secr3tp4ssw0rd_123`
 
 Starting a TSL WebSocket server from a specified process in a specified port:
 
-`node app.js -e=./examples/myShellScript.sh --port 9999 --ssl --ssl-key=cert/server.key --ssl-cert=cert/server.crt --ssl-passphrase=123412341234`
+`node-websocketd -e=./examples/myShellScript.sh --port 9999 --ssl --ssl-key=cert/server.key --ssl-cert=cert/server.crt --ssl-passphrase=123412341234`
 
-Starting a TSL WebSocket server from a specified process in a specified port with a specified password **(recomended when dealing with sensible data)**: 
+Starting a TSL WebSocket server from a specified process in a specified port with a specified password **(recomended when dealing with sensible data)**:
 
-`node app.js -e=./examples/myShellScript.sh --port 9999 --ssl --ssl-key=cert/server.key --ssl-cert=cert/server.crt --ssl-passphrase=123412341234 --password secr3tp4ssw0rd_123`
-
-
+`node-websocketd -e=./examples/myShellScript.sh --port 9999 --ssl --ssl-key=cert/server.key --ssl-cert=cert/server.crt --ssl-passphrase=123412341234 --password secr3tp4ssw0rd_123`
