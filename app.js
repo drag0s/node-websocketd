@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const WebSocketServer = require('websocket').server;
 const fs = require('fs');
 const argv = require('./lib/arguments');
