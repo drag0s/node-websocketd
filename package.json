@@ -1,8 +1,8 @@
 {
   "name": "node-websocketd",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Redirect all from STDOUT to a websocket server.",
-  "main": "app.js",
+  "main": "./app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,6 @@
   "bin": {
     "node-websocketd": "app.js"
   },
-  "main": "./app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Drag0s/node-websocketd.git"
