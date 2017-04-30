@@ -7,6 +7,10 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "node-websocketd": "app.js"
+  },
+  "main": "./app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Drag0s/node-websocketd.git"
