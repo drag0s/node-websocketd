@@ -25,6 +25,8 @@ $ node-websocketd --help
                                   server
 ```
 
+You can also set arguments with ENV variables. Just set the argument name you want with the prefix `NWS_`.
+
 ### Examples
 
 Starting a basic WebSocket server from a specified process:
@@ -46,3 +48,7 @@ Starting a TSL WebSocket server from a specified process in a specified port:
 Starting a TSL WebSocket server from a specified process in a specified port with a specified password **(recomended when dealing with sensible data)**:
 
 `node-websocketd -e=./examples/myShellScript.sh --port 9999 --ssl --ssl-key=cert/server.key --ssl-cert=cert/server.crt --ssl-passphrase=123412341234 --password secr3tp4ssw0rd_123`
+
+Setting arguments with ENV variables:
+
+`NWS_EXEC=./examples/myShellScript.sh NWS_P=9999 NWS_PASSWORD=secr3tp4ssw0rd_123 NWS_SSL=true NWS_SSL_KEY=cert/server.key NWS_SSL_CERT=cert/server.crt NWS_SSL_PASSPHRASE=123412341234 node-websocketd`
